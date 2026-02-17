@@ -36,4 +36,4 @@ def charging(charge_level: float, plug_connected: bool):
  
     return charge_level
 
-#print(charging(10))
+
