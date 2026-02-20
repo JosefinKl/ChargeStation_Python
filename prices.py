@@ -42,3 +42,26 @@ for hour in all_hours:
         price_sek_per_kwh = hour['value'] / 1000
         print(local_time, price_sek_per_kwh)
 
+
+def prices_to_charge(date_time_car_needed:datetime, hours_to_charge: int):
+    available_hours = []
+
+    for hour in all_hours:
+    
+        local_time = hour['start'].astimezone(sweden) #Convert from utc to swedish time
+    
+        # Remove hours to availabe to charge
+        if local_time >= current_hour and local_time < date_time_car_needed:
+            price_sek_per_kwh = hour['value'] / 1000
+            available_hours.append((local_time, price_sek_per_kwh))
+
+    
+    # Sortera på pris (index 1 i tuple)
+    available_hours.sort(key=lambda x: x[1])
+    cheapest_hours = available_hours[:hours_to_charge]
+
+    print(cheapest_hours)
+
+    return cheapest_hours
+            
+

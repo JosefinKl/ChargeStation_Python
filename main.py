@@ -2,6 +2,7 @@ print("Hej laddvärlden 🚗⚡")
 from datetime import datetime
 import pytz
 import charger
+import prices
 
 sweden = pytz.timezone("Europe/Stockholm")
 
@@ -28,13 +29,17 @@ print("Car needed:", needed_time)
 charge_start = input("Write 'Plug in' when plugged in: ")
 
 charge_need = charger.batteryCapacity - charge_level*charger.batteryCapacity/100
-time_to_charge = charge_need/charger.charger_power
+time_to_charge = int(charge_need/charger.charger_power)
+print(time_to_charge)
+print(type(time_to_charge))
 
 print(time_to_charge)
 
 if charge_start == "Plug in":
     print("Charger plugged in")
-    charger.charging(charge_level, True)
+    #charger.charging(charge_level, True)
+    prices.prices_to_charge(needed_time, time_to_charge)
+    
 
 
 
