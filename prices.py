@@ -21,11 +21,13 @@ prices_tomorrow = prices_spot.hourly(
     end_date=tomorrow
 )
 
-# Both lists
-all_hours = (
-    prices_today['areas']['SE3']['values'] +
-    prices_tomorrow['areas']['SE3']['values']
-)
+all_hours = prices_today['areas']['SE3']['values']
+
+# If tomorrow's data is available
+if prices_tomorrow is not None:
+    all_hours += prices_tomorrow['areas']['SE3']['values']
+else:
+    print("Tomorrow's prices not available yet.")
 
 
 now = datetime.now(sweden)
@@ -40,7 +42,7 @@ for hour in all_hours:
     # Filtrera bort timmar som redan varit
     if local_time >= current_hour:
         price_sek_per_kwh = hour['value'] / 1000
-        print(local_time, price_sek_per_kwh)
+        #print(local_time, price_sek_per_kwh)
 
 
 def prices_to_charge(date_time_car_needed:datetime, hours_to_charge: int):
@@ -50,7 +52,7 @@ def prices_to_charge(date_time_car_needed:datetime, hours_to_charge: int):
     
         local_time = hour['start'].astimezone(sweden) #Convert from utc to swedish time
     
-        # Remove hours to availabe to charge
+        # Remove hours not availabe to charge
         if local_time >= current_hour and local_time < date_time_car_needed:
             price_sek_per_kwh = hour['value'] / 1000
             available_hours.append((local_time, price_sek_per_kwh))
@@ -62,6 +64,7 @@ def prices_to_charge(date_time_car_needed:datetime, hours_to_charge: int):
 
     print(cheapest_hours)
 
-    return cheapest_hours
+    # return hours with lowest prices
+    return [hour[0] for hour in cheapest_hours]
             
 
