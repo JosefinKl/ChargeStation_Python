@@ -20,7 +20,7 @@ data = response.json()
 times = data["hourly"]["time"]
 sunshine = data["hourly"]["sunshine_duration"]  # seconds per hour
 
-print("Kommande 48h soltimmar:\n")
+#print("Kommande 48h soltimmar:\n")
 
 sunshine_list = []
 
@@ -30,10 +30,10 @@ for t, s in zip(times, sunshine):
     dt = datetime.fromisoformat(t)
     hours = s / 3600  # konvert seconds to hours
     
-    print(f"{dt}: {hours:.2f}")
+    #print(f"{dt}: {hours:.2f}")
 
     if hours > 0:
         sunshine_list.append((dt, hours))
 
-
+print("List of hours the coming 48h with sunshine accoring to wheater forcast")
 print(sunshine_list)
