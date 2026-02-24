@@ -3,3 +3,6 @@ vädertjänster och elprisuppgifter från elbolag. På så sätt ska laddappliat
  Om bilen, enligt kalender, inte ska användas på två dagar och väderprognosen visar mycket sol så hushållets 
  solceller förväntas producera mycket el ska laddningen väntas med tills solen börjat lysa. Samma sak gällande
   om det ska blåsa mycket och elpriser förväntas bli lägre pga det. Även elprisprognoser ska tas I beaktande.
+
+  Uses simulated time, starts with current time and 1 sek corresponds to 1h. 
+  
