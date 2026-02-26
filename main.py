@@ -5,6 +5,7 @@ import charger
 import prices
 import time
 import math
+import user
 
 sweden = pytz.timezone("Europe/Stockholm")
 simulated_time = datetime.now(sweden).replace(minute=0, second=0, microsecond=0) #Start with real time
